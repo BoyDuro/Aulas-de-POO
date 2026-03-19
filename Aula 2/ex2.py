@@ -1,0 +1,15 @@
+x = int(input('Informe o número do mês: '))
+
+match x:
+    case 1: print('O mês de janeiro é do primeiro trimestre do ano')
+    case 2: print('O mês de fevereiro é do primeiro trimestre do ano')
+    case 3: print('O mês de março é do primeiro trimestre do ano')
+    case 4: print('O mês de abril é do primeiro trimestre do ano')
+    case 5: print('O mês de maio é do segundo trimestre do ano')
+    case 6: print('O mês de junho é do segundo trimestre do ano')
+    case 7: print('O mês de julho é do segundo trimestre do ano')
+    case 8: print('O mês de agosto é do segundo trimestre do ano')
+    case 9: print('O mês de setembro é do terceiro trimestre do ano')
+    case 10: print('O mês de outubro é do terceiro trimestre do ano')
+    case 11: print('O mês de novembro é do terceiro trimestre do ano')
+    case 12: print('O mês de dezembro é do terceiro trimestre do ano')
