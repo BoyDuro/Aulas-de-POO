@@ -23,13 +23,18 @@ class Retangulo():
         return (self.__base ** 2 + self.__altura ** 2) ** 0.5
     
 
-x = Retangulo()
+class UI:
+    def main():
 
-x.set_base = ( float(input('Digite o valor da base: ')) )
-x.set_altura = ( float(input('Digite o valor da altura: ')) )
+        x = Retangulo()
+
+        x.set_base = ( float(input('Digite o valor da base: ')) )
+        x.set_altura = ( float(input('Digite o valor da altura: ')) )
 
 
-print(f'O retângulo de base = {x.get_base()} e altura {x.get_altura()}')
+        print(f'O retângulo de base = {x.get_base()} e altura {x.get_altura()}')
 
-diagonal = x.diagonal
-print(f'tem diagonal = {diagonal}')
+        diagonal = x.diagonal
+        print(f'tem diagonal = {diagonal}')
+
+UI.main()
