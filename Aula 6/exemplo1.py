@@ -1,4 +1,4 @@
-class Retangulo():
+class Retangulo:
     def _init_(self):
         self.__base = 0         # ATRIBUTOS ENCAPSULADOS
         self.__altura = 0
