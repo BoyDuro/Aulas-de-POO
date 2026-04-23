@@ -1,0 +1,130 @@
+class Retangulo:
+    def __init__(self, b, h):
+        self.SetBase(b)
+        self.SetAltura(h)
+    def SetBase(self, v):
+        if v >= 0:
+            self.__b = v
+        else:
+            raise ValueError()
+    def SetAltura(self, v):
+        if v >= 0:
+            self.__h = v
+        else:
+            raise ValueError()
+    def GetBase(self):
+        return self.__b
+    def GetAltura(self):
+        return self.__h
+    def CalcArea(self):
+        return self.__b * self.__h
+    def CalcDiagonal(self):
+        return (self.__b**2 + self.__h**2)**0.5
+    def __str__(self):
+        return f'O retângulo têm base = {self.GetBase()} e altura = {self.GetAltura()}'
+
+class Frete:
+    def __init__(self, d, p):
+        self.SetDistancia(d)
+        self.SetPeso(p)
+    def SetDistancia(self, v):
+        if v >= 0:
+            self.__d = v
+        else:
+            raise ValueError()
+    def SetPeso(self, v):
+        if v >= 0:
+            self.__p = v
+        else:
+            raise ValueError()
+    def GetDistancia(self):
+        return self.__d
+    def GetPeso(self):
+        return self.__p
+    def CalcFrete(self):
+        return (self.__p / self.__d) / 100
+    def __str__(self):
+        return f'A distância percorrida será = {self.GetDistancia()} e o peso será = {self.GetPeso()}'
+
+class Equacao:
+    def __init__(self, a, b, c):
+        self.Set_a(a)
+        self.Set_b(b)
+        self.Set_c(c)
+    def Set_a(self, v):
+        if v != 0:
+            self.__a = v
+        else:
+            raise ValueError()
+    def Set_b(self, v):
+        self.__b = v
+    def Set_c(self, v):
+        self.__c = v
+    def Get_a(self):
+        return self.__a
+    def Get_b(self):
+        return self.__b
+    def Get_c(self):
+        return self.__c
+    def Delta(self):
+        return (self.__b**2 - 4 * self.__a * self.__c)
+    def TemRaizesReais(self):
+        if self.Delta() < 0:
+            return 'Não tem raizes reais'
+        else:
+            return 'Tem raizes reais'
+    def Raiz1(self):
+        return (self.__b * -1) - self.Delta()**0.5
+    def Raiz2(self):
+        return (self.__b * -1) + self.Delta()**0.5
+    def __str__(self):
+        return f'Temos como valores: a = {self.Get_a()}, b = {self.Get_b()} e c = {self.Get_c()}'
+
+        
+
+
+class UI:
+    def main():
+        op = 0
+        while op != 9:
+            op = UI.menu()
+            if op == 1: 
+                UI.retangulo()
+            elif op == 2: 
+                UI.frete()
+            elif op == 3: 
+                UI.equacao()
+
+
+    @staticmethod
+    def menu():
+        print('1-Retângulo 2-Frete 3-Equação do 2o grau 9-Fim')
+        op = int(input('Informe uma opção: '))
+        return op 
+    
+    @staticmethod
+    def retangulo():
+        b = float(input('Digite o valor da base: '))
+        h = float(input('Digite o valor da altura: '))
+        x = Retangulo(b, h)
+        print(x)
+        print(f'Possui área = {x.CalcArea()} e diagonal = {x.CalcDiagonal()}')
+
+    @staticmethod
+    def frete():
+        d = float(input('Digite o valor da distância em Km: '))
+        p = float(input('Digite o valor do peso em Kg: '))
+        x = Frete(d, p)
+        print(x)
+        print(f'E o frete será = {x.CalcFrete()}')
+    
+    @staticmethod
+    def equacao():
+        a = float(input('Digite o valor de a: '))
+        b = float(input('Digite o valor de b: '))
+        c = float(input('Digite o valor de c: '))
+        x = Equacao(a, b, c)
+        print(x)
+        print(x.TemRaizesReais())
+        print(f'A raiz 1 = {x.Raiz1()} e a raiz 2 = {x.Raiz2()}')
+UI.main()
