@@ -127,4 +127,6 @@ class UI:
         print(x)
         print(x.TemRaizesReais())
         print(f'A raiz 1 = {x.Raiz1()} e a raiz 2 = {x.Raiz2()}')
+
+
 UI.main()
