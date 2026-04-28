@@ -50,6 +50,6 @@ class UI:
         a = float(input('Digite a área do país: '))
         x = Pais(n, p, a)
         print(x)
-        print(f'Dito isso, têm densidade demográfica = {x.Densidade()}')
+        print(f'Dito isso, têm densidade demográfica = {x.Densidade():.2f}')
 
 UI.main()

@@ -51,6 +51,6 @@ class UI:
         l = float(input('Digite o gasto de combustível em litros: '))
         x = Viagem(v, d, l)
         print(x)
-        print(f'O gasto total da viagem foi = {x.consumo()}')
+        print(f'O gasto total da viagem foi = {x.consumo():.2f}')
 
 UI.main()
