@@ -1,4 +1,4 @@
-class PlayList:
+class Playlist:
     def __init__(self, id, nome, descricao):
         self.set_id(id)
         self.set_nome(nome)
@@ -62,7 +62,7 @@ class Musica:
         return f'A música {self.get_titulo()}, de {self.get_artista()} e do álbum {self.get_album()} tem id: {self.get_id()}'
 
 
-class PlayListItem:
+class PlaylistItem:
     def __init__(self, id, idPlaylist, idMusica, sequencia):
         self.set_id(id)
         self.set_idPlaylist(idPlaylist)
@@ -90,7 +90,7 @@ class PlayListItem:
         return f'A música de id: {self.get_id()} vai para a playlist de id {self.get_idPlaylist()} como sequência: {self.get_sequencia()}, esse item terá id: {self.get_id()}'
 
 
-class PlayListUI:
+class PlaylistUI:
     playlists = []
     musicas = []
     itens = []
@@ -99,27 +99,27 @@ class PlayListUI:
     def main():
         op = 0
         while op != 11:
-            op = PlayListUI.menu()
+            op = PlaylistUI.menu()
             if op == 1: 
-                PlayListUI.inserir_playlist()
+                PlaylistUI.inserir_playlist()
             if op == 2: 
-                PlayListUI.listar_playlist()
+                PlaylistUI.listar_playlist()
             if op == 3: 
-                PlayListUI.atualizar_playlist()
+                PlaylistUI.atualizar_playlist()
             if op == 4: 
-                PlayListUI.excluir_playlist()
+                PlaylistUI.excluir_playlist()
             if op == 5: 
-                PlayListUI.inserir_musica()
+                PlaylistUI.inserir_musica()
             if op == 6: 
-                PlayListUI.listar_musica()
+                PlaylistUI.listar_musica()
             if op == 7: 
-                PlayListUI.atualizar_musica()
+                PlaylistUI.atualizar_musica()
             if op == 8: 
-                PlayListUI.excluir_musica()
+                PlaylistUI.excluir_musica()
             if op == 9: 
-                PlayListUI.inserir_item()
+                PlaylistUI.inserir_item()
             if op == 10:
-                PlayListUI.listar_itens_playlist()
+                PlaylistUI.listar_itens_playlist()
 
     @staticmethod
     def menu():
@@ -132,7 +132,7 @@ class PlayListUI:
         nome = input('Nome: ')
         descricao = input('Descrição: ')
 
-        x = PlayList(id, nome, descricao)
+        x = Playlist(id, nome, descricao)
         cls.playlists.append(x)
 
         print('Playlist inserida')
@@ -147,7 +147,7 @@ class PlayListUI:
 
     @classmethod
     def atualizar_playlist(cls):
-        PlayListUI.listar_playlist()
+        PlaylistUI.listar_playlist()
 
         id = int(input('Informe o id da playlist: '))
         for x in cls.playlists:
@@ -157,14 +157,14 @@ class PlayListUI:
                 nome = input('Novo nome: ')
                 descricao = input('Nova descrição: ')
 
-                novo = PlayList(id, nome, descricao)
+                novo = Playlist(id, nome, descricao)
                 cls.playlists.append(novo)
 
                 print('Playlist atualizada')
 
     @classmethod
     def excluir_playlist(cls):
-        PlayListUI.listar_playlist()
+        PlaylistUI.listar_playlist()
 
         id = int(input('Informe o id da playlist: '))
         for x in cls.playlists:
@@ -196,7 +196,7 @@ class PlayListUI:
     @classmethod
     def atualizar_musica(cls):
 
-        PlayListUI.listar_musica()
+        PlaylistUI.listar_musica()
 
         id = int(input('Informe o id da música: '))
         for x in cls.musicas:
@@ -214,7 +214,7 @@ class PlayListUI:
 
     @classmethod
     def excluir_musica(cls):
-        PlayListUI.listar_musica()
+        PlaylistUI.listar_musica()
 
         id = int(input('Informe o id da música: '))
         for x in cls.musicas:
@@ -230,7 +230,7 @@ class PlayListUI:
         idMusica = int(input('Id da música: '))
         sequencia = int(input('Sequência: '))
 
-        x = PlayListItem(id, idPlaylist, idMusica, sequencia)
+        x = PlaylistItem(id, idPlaylist, idMusica, sequencia)
         cls.itens.append(x)
 
         print('Item inserido')
@@ -247,4 +247,4 @@ class PlayListUI:
                     if y.get_id() == idMusica:
                      print(y)
 
-PlayListUI.main()
+PlaylistUI.main()
