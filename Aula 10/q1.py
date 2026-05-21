@@ -1,9 +1,11 @@
 from datetime import datetime
-class Time:
-    def __init__(self, id, nome, telefone):
+class Paciente:
+    def __init__(self, id, nome, c, telefone, nasc):
         self.set_id(id)
         self.set_nome(nome)
+        self.set_cpf(c)
         self.set_telefone(telefone)
+        self.set_nasc(nasc)
     def set_id(self, id):
         if id > 0:
             self.__id = id
@@ -14,208 +16,112 @@ class Time:
             self.__nome = nome
         else:
             raise ValueError
-    def set_estado(self, estado):
-        if len(estado) > 0:
-            self.__estado = estado
+    def set_cpf(self, c):
+        if len(c) > 0:
+            self.__cpf = c
         else:
             raise ValueError
+    def set_telefone(self, telefone):
+        if len(telefone) > 0:
+            self.__telefone = telefone
+        else:
+            raise ValueError
+    def set_nasc(self, nasc):
+        self.__nasc = nasc
     def get_id(self):
         return self.__id
     def get_nome(self):
         return self.__nome
-    def get_estado(self):
-        return self.__estado
+    def get_cpf(self):
+        return self.__cpf
+    def get_telefone(self):
+        return self.__telefone
+    def get_nasc(self):
+        return self.__nasc
+    def idade(self):
+        tempo = datetime.now() - self.__nasc
+        anos = tempo.days // 365
+        meses = tempo.days % 365 // 30
+        return f'Idade: {anos} ano(s) e {meses} mes(es)'
     def __str__(self):
-        return f'O Time {self.get_nome()} do Estado de {self.get_estado()} tem id: {self.get_id()}'
+        return f'id: {self.get_id()} - nome: {self.get_nome()} - CPF: {self.get_cpf()} - telefone: {self.get_telefone()} - nasc: {self.get_nasc().strftime('%d/%m/%Y')}'
 
-class Jogador:
-    def __init__(self, id, idTime, nome, camisa):
-        self.set_id(id)
-        self.set_idTime(idTime)
-        self.set_nome(nome)
-        self.set_camisa(camisa)
-    def set_id(self, id):
-        if id > 0:
-            self.__id = id
-        else:
-            raise ValueError
-    def set_idTime(self, idTime):
-        if idTime > 0:
-            self.__idTime = idTime
-        else:
-            raise ValueError
-    def set_nome(self, nome):
-        if len(nome) > 0:
-            self.__nome = nome
-        else:
-            raise ValueError
-    def set_camisa(self, camisa):
-        if camisa > 0 and camisa <= 99:
-            self.__camisa = camisa
-        else:
-            raise ValueError
-    def get_id(self):
-        return self.__id
-    def get_idTime(self):
-        return self.__idTime
-    def get_nome(self):
-        return self.__nome
-    def get_camisa(self):
-        return self.__camisa
-    def __str__(self):
-        return f'O jogador {self.get_nome()}, camisa {self.get_camisa()} tem id: {self.get_id()}'
-    
-
-class TimeUI:
-    times = []
-    jogadores = []
+class PacienteUI:
+    Pacientes = []
    
     @staticmethod
     def main():
         op = 0
         while op!= 11:
-            op = TimeUI.menu()
+            op = PacienteUI.menu()
             if op == 1:
-                TimeUI.inserir_time()
+                PacienteUI.inserir_Paciente()
             if op == 2:
-                TimeUI.listar_time()
+                PacienteUI.listar_Paciente()
             if op == 3:
-                TimeUI.atualizar_time()
+                PacienteUI.atualizar_Paciente()
             if op == 4:
-                TimeUI.excluir_time()
+                PacienteUI.excluir_Paciente()
             if op == 5:
-                TimeUI.inserir_jogador()
-            if op == 6:
-                TimeUI.listar_jogador()
-            if op == 7:
-                TimeUI.atualizar_jogador()
-            if op == 8:
-                TimeUI.excluir_jogador()
-            if op == 9:
-                TimeUI.listar_jogadores_time()
-            if op == 10:
-                TimeUI.transferir_jogador()
-    
+                PacienteUI.Aniversariantes()
     @staticmethod
     def menu():
-        print('1 - inserir time  2 - listar time  3 - atualizar time  4 - excluir time  5 - inserir jogador  6 - listar jogador  7 - atualizar jogador  8 - excluir jogador  9 - listar jogadores do time  10 - transferir jogador para outro time  11 - Sair')
+        print('1 - inserir Paciente  2 - listar Paciente  3 - atualizar Paciente  4 - excluir Paciente  5 - pesquisar  6 - aniversariantes  11 - Sair')
         return int(input('Escolha a opção: '))
 
     @classmethod
-    def inserir_time(cls):
-        id = int(input('Id do time: '))
+    def inserir_Paciente(cls):
+        id = int(input('Id do Paciente: '))
         nome = input('Nome: ')
-        estado = input('Estado: ')
+        cpf = input('CPF: ')
+        telefone = input('telefone: ')
+        nascimento = datetime.strptime(input('Data de nascimento: '), '%d/%m/%Y')
 
-        x = Time(id, nome, estado)
-        cls.times.append(x)
-        print('Time inserido')
+        x = Paciente(id, nome, cpf, telefone, nascimento)
+        cls.Pacientes.append(x)
+        print('Paciente inserido')
     
     @classmethod
-    def listar_time(cls):
-        if len(cls.times) == 0:
-            print('Nenhum time cadastrado')
+    def listar_Paciente(cls):
+        if len(cls.Pacientes) == 0:
+            print('Nenhum Paciente cadastrado')
 
         else:
-            for x in cls.times:
+            for x in cls.Pacientes:
                 print(x)
     
     @classmethod
-    def atualizar_time(cls):
-        TimeUI.listar_time()
+    def atualizar_Paciente(cls):
+        PacienteUI.listar_Paciente()
 
-        id = int(input('Informe o id do time: '))
+        id = int(input('Informe o id do Paciente: '))
 
-        for x in cls.times:
+        for x in cls.Pacientes:
             if x.get_id() == id:
-                cls.times.remove(x)
+                cls.Pacientes.remove(x)
 
                 nome = input('Novo nome: ')
-                estado = input('Novo estado: ')
+                telefone = input('Novo telefone: ')
 
-                novo = Time(id, nome, estado)
+                novo = Paciente(id, nome, telefone)
 
-                cls.times.append(novo)
-                print('Time atualizado')
+                cls.Pacientes.append(novo)
+                print('Paciente atualizado')
 
     @classmethod
-    def excluir_time(cls):
-        TimeUI.listar_time()
-        id = int(input('Informe o id do time: '))
+    def excluir_Paciente(cls):
+        PacienteUI.listar_Paciente()
+        id = int(input('Informe o id do Paciente: '))
 
-        for x in cls.times:
+        for x in cls.Pacientes:
             if x.get_id() == id:
-                cls.times.remove(x)
-                print('Time removido')
-    
-    @classmethod
-    def inserir_jogador(cls):
-        id = int(input('Informe o id do jogador: '))
-        idTime = int(input('Informe o id do time: '))
-        nome = input('Informe o nome: ')
-        camisa = int(input('Informe a camisa: '))
-
-        x = Jogador(id, idTime, nome, camisa)
-        cls.jogadores.append(x)
-        print('Jogador inserido')
+                cls.Pacientes.remove(x)
+                print('Paciente removido')
 
     @classmethod
-    def listar_jogador(cls):
-        if len(cls.jogadores) == 0:
-            print('Nenhum jogador cadastrado')
+    def Aniversariantes(cls):
+        for x in cls.Pacientes:
+            if (x.get_nasc()).month == (datetime.now()).month:
+                print(x.get_nome())
 
-        else:
-            for x in cls.jogadores:
-                print(x)
-
-    @classmethod
-    def atualizar_jogador(cls):
-        TimeUI.listar_jogador()
-
-        id = int(input('Informe o id do jogador: '))
-
-        for x in cls.jogadores:
-            if x.get_id() == id:
-                cls.jogadores.remove(x)
-
-                idTime = int(input('Novo id do time: '))
-                nome = input('Novo nome: ')
-                camisa = int(input('Nova camisa: '))
-
-                novo = Jogador(id, idTime, nome, camisa)
-
-                cls.jogadores.append(novo)
-                print('Jogador atualizado')
-
-    @classmethod
-    def excluir_jogador(cls):
-        TimeUI.listar_jogador()
-        id = int(input('Informe o id do jogador: '))
-
-        for x in cls.jogadores:
-            if x.get_id() == id:
-                cls.jogadores.remove(x)
-                print('Jogador removido')
-
-    @classmethod
-    def listar_jogadores_time(cls):
-        idTime = int(input('Informe o id do time: '))
-
-        for x in cls.jogadores:
-            if x.get_idTime() == idTime:
-                print(x)
-
-    @classmethod
-    def transferir_jogador(cls):
-        TimeUI.listar_jogador()
-
-        id = int(input('Informe o id do jogador: '))
-
-        for x in cls.jogadores:
-            if x.get_id() == id:
-                novoTime = int(input('Novo id do time: '))
-                x.set_idTime(novoTime)
-
-                print('Jogador transferido')
-
-TimeUI.main()
+PacienteUI.main()
