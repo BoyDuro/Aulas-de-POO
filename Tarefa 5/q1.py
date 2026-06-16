@@ -8,19 +8,19 @@ class Treino:
         self.set_tempo(tempo)
     def set_id(self, id):
         if id < 0: 
-            raise ValueError
+            raise ValueError('Id inválido')
         self.__id = id
     def set_data(self, data):
         if data > datetime.now():
-            raise ValueError
+            raise ValueError('Data não pode ser no futuro')
         self.__data = data
     def set_dist(self, dist):
         if dist < 0:
-            raise ValueError
+            raise ValueError('Distância não pode ser negativa')
         self.__dist = dist
     def set_tempo(self, tempo):
-        if tempo < 0:
-            raise ValueError
+        if tempo < timedelta():
+            raise ValueError('Tempo não pode ser negativo')
         self.__tempo = tempo
     def get_id(self):
         return self.__id
@@ -32,11 +32,10 @@ class Treino:
         return self.__tempo
     def pace(self):
         tempo = self.__tempo.total_seconds()
-        distancia = self.__dist * 1000
-        pace = tempo / distancia
+        pace = tempo / self.__dist
         return timedelta(seconds=pace)
     def __str__(self):
-        return f'id: {self.__id} - data: {self.__data} - distância: {self.__dist} - tempo: {self.__tempo}'
+        return f'id: {self.__id} - data: {self.__data} - distância: {self.__dist} - tempo: {self.__tempo} - pace: {self.pace()}'
     
 
 class TreinoUI:
@@ -76,7 +75,7 @@ class TreinoUI:
 
     @classmethod
     def listar(cls):
-        for x in cls.treinos:
+        for x in cls.__treinos:
             print(x)
 
     @classmethod
@@ -108,4 +107,13 @@ class TreinoUI:
 
     @classmethod
     def MaisRapido(cls):
-        pass
+        menor = cls.__treinos[0]
+
+        for x in cls.__treinos:
+            if x.pace() < menor.pace():
+                menor = x
+        
+        print(menor)
+                
+
+TreinoUI.main()

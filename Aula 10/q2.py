@@ -96,7 +96,7 @@ class BoletoUI:
         print(' 1-Inserir  2-Listar  3-Atualizar  4-Excluir')
         print(' 5-Boletos em Aberto  6-Boletos pagos')
         print(' 7-Boletos a Vencer  8-Boletos Vencidos')
-        print( '9-Pagar Boletos  10-Fim')
+        print(' 9-Pagar Boletos  10-Fim')
         print('---------------------------------------------')
         return int(input('Escolha uma opção: '))
 
