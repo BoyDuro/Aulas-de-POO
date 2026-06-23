@@ -1,14 +1,8 @@
 [
   {
     "id": 1,
-    "nome": "Douglas Crockford"
-  },
-  {
-    "id": 2,
-    "nome": "Jon Bosak"
-  },
-  {
-    "id": 3,
-    "nome": "Alan Turing"
+    "nome": "Matheus",
+    "email": "mmsantiago07@gmail.com",
+    "fone": "988187504"
   }
 ]
