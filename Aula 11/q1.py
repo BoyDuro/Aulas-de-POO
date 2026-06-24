@@ -2,10 +2,10 @@ import json
 
 class Cliente:
     def __init__(self, id, nome, email, fone):
-        self.__id = id
-        self.__nome = nome
-        self.__email = email
-        self.__fone = fone
+        self.set_id(id)
+        self.set_nome(nome)
+        self.set_email(email)
+        self.set_fone(fone)
     def set_id(self, id):
         if id < 0:
             raise ValueError('Não pode ser valor negativo')
@@ -30,7 +30,7 @@ class Cliente:
     def get_fone(self):
         return self.__fone
     def __str__(self):
-        return f'Id: {self.__id} - Nome: {self.__nome} - Email: {self.__email} - Telefone: {self.__fone}'
+        return f'\nId: {self.__id} - Nome: {self.__nome} - Email: {self.__email} - Telefone: {self.__fone}'
     def to_json(self):
         return {'id': self.__id, 'nome': self.__nome, 'email': self.__email, 'fone': self.__fone}
     @staticmethod
