@@ -39,7 +39,7 @@ class Contato:
     def get_nasc(self):
         return self.__nasc
     def __str__(self):
-        return f'\nId: {self.__id} - Nome: {self.__nome} - Email: {self.__email} - Telefone: {self.__telefone} - Nascimento: {self.__nasc.strftime("%d/%m/%Y")}\n'
+        return f'Id: {self.__id} - Nome: {self.__nome} - Email: {self.__email} - Telefone: {self.__telefone} - Nascimento: {self.__nasc.strftime("%d/%m/%Y")}'
     def to_json(self):
         return {'id': self.__id, 'nome': self.__nome, 'email': self.__email, 'telefone': self.__telefone, 'nasc': self.__nasc.strftime('%d/%m/%Y')}
     @staticmethod
@@ -76,8 +76,7 @@ class ContatoUI:
         print('1 - Inserir contato   2 - Listar contatos')
         print('3 - Listar contato por Id   4 - Atualizar contato')
         print('5 - Excluir contato   6 - Pesquisar por iniciais')
-        print('7 - Listar aniversariantes   8 - Abrir arquivo')
-        print('9 - Salvar arquivo   10 - Sair\n')
+        print('7 - Listar aniversariantes   10 - Sair\n')
 
         return int(input('Digite o número do que você quer fazer: '))
 
@@ -109,7 +108,7 @@ class ContatoUI:
             if x.get_id() == id:
                 print(x)
             else:
-                print('\nId não existe\n')
+                print('Id não existe')
 
     @classmethod
     def atualizar(cls):
