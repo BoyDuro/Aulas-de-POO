@@ -8,51 +8,38 @@ class Contato:
         self.set_email(email)
         self.set_telefone(telefone)
         self.set_data_nascimento(data_nascimento)
-
     def set_id(self, id):
         if id < 0:
             raise ValueError('Não pode ser valor negativo')
         self.__id = id
-
     def set_nome(self, nome):
         if nome == '':
             raise ValueError('Não pode ser vazio')
         self.__nome = nome
-
     def set_email(self, email):
         if email == '':
             raise ValueError('Não pode ser vazio')
         self.__email = email
-
     def set_telefone(self, telefone):
         if telefone == '':
             raise ValueError('Não pode ser vazio')
         self.__telefone = telefone
-
     def set_data_nascimento(self, data_nascimento):
         self.__data_nascimento = data_nascimento
-
     def get_id(self):
         return self.__id
-
     def get_nome(self):
         return self.__nome
-
     def get_email(self):
         return self.__email
-
     def get_telefone(self):
         return self.__telefone
-
     def get_data_nascimento(self):
         return self.__data_nascimento
-
     def __str__(self):
         return f'\nId: {self.__id} - Nome: {self.__nome} - Email: {self.__email} - Telefone: {self.__telefone} - Nascimento: {self.__data_nascimento.strftime("%d/%m/%Y")}\n'
-
     def to_json(self):
         return {'id': self.__id, 'nome': self.__nome, 'email': self.__email, 'telefone': self.__telefone, 'data_nascimento': self.__data_nascimento.strftime('%d/%m/%Y')}
-
     @staticmethod
     def from_json(dic):
         return Contato(dic['id'], dic['nome'], dic['email'], dic['telefone'], datetime.strptime(dic['data_nascimento'], '%d/%m/%Y'))
@@ -63,7 +50,6 @@ class ContatoUI:
     @staticmethod
     def main():
         op = 0
-
         while op != 10:
             op = ContatoUI.menu()
             ContatoUI.abrir()
