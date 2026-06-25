@@ -25,6 +25,8 @@ class Contato:
             raise ValueError('Não pode ser vazio')
         self.__telefone = telefone
     def set_data_nascimento(self, data_nascimento):
+        if data_nascimento > datetime.now():
+            raise ValueError('Data de nascimento não pode ser no futuro')
         self.__data_nascimento = data_nascimento
     def get_id(self):
         return self.__id
@@ -71,16 +73,11 @@ class ContatoUI:
 
     @staticmethod
     def menu():
-        print('1 - Inserir contato')
-        print('2 - Listar contatos')
-        print('3 - Listar contato por Id')
-        print('4 - Atualizar contato')
-        print('5 - Excluir contato')
-        print('6 - Pesquisar por iniciais')
-        print('7 - Listar aniversariantes')
-        print('8 - Abrir arquivo')
-        print('9 - Salvar arquivo')
-        print('10 - Sair\n')
+        print('1 - Inserir contato   2 - Listar contatos')
+        print('3 - Listar contato por Id   4 - Atualizar contato')
+        print('5 - Excluir contato   6 - Pesquisar por iniciais')
+        print('7 - Listar aniversariantes   8 - Abrir arquivo')
+        print('9 - Salvar arquivo   10 - Sair\n')
 
         return int(input('Digite o número do que você quer fazer: '))
 
