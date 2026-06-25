@@ -2,12 +2,12 @@ import json
 from datetime import datetime
 
 class Contato:
-    def __init__(self, id, nome, email, telefone, data_nascimento):
+    def __init__(self, id, nome, email, telefone, nasc):
         self.set_id(id)
         self.set_nome(nome)
         self.set_email(email)
         self.set_telefone(telefone)
-        self.set_data_nascimento(data_nascimento)
+        self.set_nasc(nasc)
     def set_id(self, id):
         if id < 0:
             raise ValueError('Não pode ser valor negativo')
@@ -24,10 +24,10 @@ class Contato:
         if telefone == '':
             raise ValueError('Não pode ser vazio')
         self.__telefone = telefone
-    def set_data_nascimento(self, data_nascimento):
-        if data_nascimento > datetime.now():
+    def set_nasc(self, nasc):
+        if nasc > datetime.now():
             raise ValueError('Data de nascimento não pode ser no futuro')
-        self.__data_nascimento = data_nascimento
+        self.__nasc = nasc
     def get_id(self):
         return self.__id
     def get_nome(self):
@@ -36,15 +36,15 @@ class Contato:
         return self.__email
     def get_telefone(self):
         return self.__telefone
-    def get_data_nascimento(self):
-        return self.__data_nascimento
+    def get_nasc(self):
+        return self.__nasc
     def __str__(self):
-        return f'\nId: {self.__id} - Nome: {self.__nome} - Email: {self.__email} - Telefone: {self.__telefone} - Nascimento: {self.__data_nascimento.strftime("%d/%m/%Y")}\n'
+        return f'\nId: {self.__id} - Nome: {self.__nome} - Email: {self.__email} - Telefone: {self.__telefone} - Nascimento: {self.__nasc.strftime("%d/%m/%Y")}\n'
     def to_json(self):
-        return {'id': self.__id, 'nome': self.__nome, 'email': self.__email, 'telefone': self.__telefone, 'data_nascimento': self.__data_nascimento.strftime('%d/%m/%Y')}
+        return {'id': self.__id, 'nome': self.__nome, 'email': self.__email, 'telefone': self.__telefone, 'nasc': self.__nasc.strftime('%d/%m/%Y')}
     @staticmethod
     def from_json(dic):
-        return Contato(dic['id'], dic['nome'], dic['email'], dic['telefone'], datetime.strptime(dic['data_nascimento'], '%d/%m/%Y'))
+        return Contato(dic['id'], dic['nome'], dic['email'], dic['telefone'], datetime.strptime(dic['nasc'], '%d/%m/%Y'))
 
 class ContatoUI:
     __lista = []
@@ -87,9 +87,9 @@ class ContatoUI:
         nome = input('Digite o nome: ')
         email = input('Digite o email: ')
         telefone = input('Digite o telefone: ')
-        data = datetime.strptime(input('Digite a data (dd/mm/aaaa): '), '%d/%m/%Y')
+        nasc = datetime.strptime(input('Digite a data (dd/mm/aaaa): '), '%d/%m/%Y')
 
-        x = Contato(id, nome, email, telefone, data)
+        x = Contato(id, nome, email, telefone, nasc)
         cls.__lista.append(x)
         ContatoUI.salvar()
 
@@ -124,7 +124,7 @@ class ContatoUI:
                 x.set_nome(nome)
                 x.set_email(email)
                 x.set_telefone(fone)
-                x.set_data_nascimento(nasc)
+                x.set_nasc(nasc)
                 ContatoUI.salvar()
 
     @classmethod
@@ -149,7 +149,7 @@ class ContatoUI:
         mes = int(input('Digite o mês: '))
 
         for x in cls.__lista:
-            if x.get_data_nascimento().month == mes:
+            if x.get_nasc().month == mes:
                 print(x)
 
     @classmethod
