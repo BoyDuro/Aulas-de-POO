@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "nome": "Brasil",
+    "sigla": "BRA",
+    "grupo": "D"
+  },
+  {
+    "id": 2,
+    "nome": "Jap\u00e3o",
+    "sigla": "JAP",
+    "grupo": "H"
+  }
+]
