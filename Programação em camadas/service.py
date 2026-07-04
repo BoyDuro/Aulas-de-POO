@@ -32,4 +32,4 @@ class Service:
         obj = Servico(id, descricao, valor)
         ServicoDAO().atualizar(obj)
     def servico_excluir(id):
-        ServicoDAO.excluir(id)
+        ServicoDAO().excluir(id)
