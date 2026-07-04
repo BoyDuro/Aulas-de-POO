@@ -5,7 +5,6 @@ class ClienteDAO:
         self.__arquivo = 'clientes.json'
         self.__objetos = []
         self.__abrir()
-    
     def inserir(self, obj):
         self.__objetos.append(obj)
         self.__salvar()
@@ -16,7 +15,6 @@ class ClienteDAO:
             if obj.get_id() == id:
                 return obj
         return None
-    
     def atualizar(self, obj):
         aux = self.listar_id(obj.get_id())
         if aux != None:
@@ -28,10 +26,9 @@ class ClienteDAO:
         if aux != None:
             self.__objetos.remove(aux)
             self.__salvar()
-
     def __abrir(self):
         try:
-            arquivo = open(self.__arquivo, mode = "r")
+            arquivo = open(self.__arquivo, mode = 'r')
             list_dic = json.load(arquivo)
             arquivo.close()
             self.__objetos = []

@@ -1,5 +1,7 @@
 from models.cliente import Cliente
-from models.clientedao import ClienteDAO
+from models.clienteDAO import ClienteDAO
+from models.servico import Servico
+from models.servicoDAO import ServicoDAO
 class Service:
     @staticmethod
     def cliente_inserir(id, nome, email, fone):
@@ -18,3 +20,16 @@ class Service:
     @staticmethod
     def cliente_excluir(id):
         ClienteDAO().excluir(id)
+    @staticmethod
+    def servico_inserir(id, descricao, valor):
+        obj = Servico(id, descricao, valor)
+        ServicoDAO().inserir(obj)
+    def servico_listar():
+        return ServicoDAO().listar()
+    def servico_listar_id(id):
+        return ServicoDAO.listar_id(id)
+    def servico_atualizar(id, descricao, valor):
+        obj = Servico(id, descricao, valor)
+        ServicoDAO().atualizar(obj)
+    def servico_excluir(id):
+        ServicoDAO.excluir(id)
