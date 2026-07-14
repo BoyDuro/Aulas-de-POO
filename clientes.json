@@ -1,14 +1,9 @@
 [
   {
     "id": 1,
-    "nome": "Cliente teste 1",
-    "email": "cteste1@gmail.com",
-    "fone": "9888187504"
-  },
-  {
-    "id": 2,
-    "nome": "Cliente teste 2",
-    "email": "cteste2@gmail.com",
-    "fone": "99772883"
+    "nome": "Mat",
+    "email": "matemail",
+    "fone": "1234",
+    "senha": "0710"
   }
 ]

@@ -1,12 +1,12 @@
-class Cliente:
-    def __init__(self, id, nome, email, fone, senha):
+class Profissional:
+    def __init__(self, id, nome, email, senha, especialidade):
         self.set_id(id)
         self.set_nome(nome)
         self.set_email(email)
-        self.set_fone(fone)
         self.set_senha(senha)
+        self.set_especialidade(especialidade)
     def __str__(self):
-        return f'{self.__id} - {self.__nome} - {self.__email} - {self.__fone}'
+        return f'{self.__id} - {self.__nome} - {self.__email} - {self.__especialidade}'
     def set_id(self, id):
         if id < 0:
             raise ValueError('Id deve ser positivo')
@@ -19,14 +19,14 @@ class Cliente:
         if email == '':
             raise ValueError('E-mail deve ser informado')
         self.__email = email
-    def set_fone(self, fone):
-        if fone == '':
-            raise ValueError('Fone deve ser informado')
-        self.__fone = fone
     def set_senha(self, senha):
         if senha == '':
             raise ValueError('Senha deve ser informada')
         self.__senha = senha
+    def set_especialidade(self, especialidade):
+        if especialidade == '':
+            raise ValueError('Especialidade deve ser informada')
+        self.__especialidade = especialidade
     def get_id(self):
         return self.__id
     def get_nome(self):
@@ -37,8 +37,10 @@ class Cliente:
         return self.__fone
     def get_senha(self):
         return self.__senha
+    def get_especialidade(self):
+        return self.__especialidade
     def to_json(self):
-        return {'id': self.__id, 'nome': self.__nome, 'email': self.__email, 'fone': self.__fone, 'senha': self.__senha}
+        return {'id': self.__id, 'nome': self.__nome, 'email': self.__email, 'senha': self.__senha, 'especialidade': self.__especialidade}
     @staticmethod
     def from_json(dic):
-        return Cliente(dic['id'], dic['nome'], dic['email'], dic['fone'], dic['senha'])
+        return Profissional(dic['id'], dic['nome'], dic['email'], dic['senha'], dic['especialidade'])
