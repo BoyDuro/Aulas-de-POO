@@ -1,0 +1,20 @@
+class Service:  
+    @staticmethod  
+    def cliente_inserir(id, nome, email, fone, nasc):
+        obj = Cliente(id, nome, email, fone, nasc)
+        ClienteDAO().inserir(obj)  
+    @staticmethod  
+    def cliente_listar():
+        return ClienteDAO().listar() 
+    @staticmethod  
+    def cliente_listar_id(id):
+        return ClienteDAO().listar_id(id)
+    @staticmethod  
+    def cliente_atualizar(id, nome, email, fone, nascimento):
+        obj = Cliente(id, nome, email, fone, nascimento)
+        ClienteDAO().atualizar(obj)  
+    @staticmethod  
+    def cliente_excluir(id):
+        ClienteDAO().excluir(id)
+    def cliente_aniversario(mes):
+        ClienteDAO().aniversario(mes)

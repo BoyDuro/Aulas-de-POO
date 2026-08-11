@@ -1,0 +1,11 @@
+class ClienteDAO:  
+    def __init__(self):  
+        self.__arquivo = "clientes.json" 
+        self.__objetos = []  
+        self.__abrir()  
+    def inserir(self, obj):
+        for i in self.__objetos:
+            if i.get_email() == obj.get_email():
+                raise ValueError()  
+        self.__objetos.append(obj)  
+        self.__salvar()

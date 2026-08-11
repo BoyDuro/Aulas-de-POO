@@ -1,0 +1,9 @@
+class UI:  
+    @staticmethod  
+    def cliente_inserir():  
+        id = int(input('Informe o id: '))  
+        nome = input('Informe o nome: ')  
+        email = input('Informe o e-mail: ')  
+        fone = input('Informe o telefone: ')  
+        nascimento = datetime.strptime(input('Informe a data de nascimento: '))
+        Service.cliente_inserir(id, nome, email, fone, nascimento)  
