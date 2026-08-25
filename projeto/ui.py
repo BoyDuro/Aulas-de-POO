@@ -1,4 +1,5 @@
 from service import Service
+from datetime import datetime
 
 class UI:
     @staticmethod
@@ -14,6 +15,10 @@ class UI:
             if op == 6: UI.servico_listar()
             if op == 7: UI.servico_atualizar()
             if op == 8: UI.servico_excluir()
+            if op == 9: UI.horario_inserir()
+            if op == 10: UI.horario_listar()
+            if op == 11: UI.horario_atualizar()
+            if op == 12: UI.horario_excluir()
 
     @staticmethod
     def menu():
@@ -73,6 +78,29 @@ class UI:
 
     @staticmethod
     def servico_excluir():
+        for obj in Service.servico_listar(): print(obj)
+        id = int(input('Informe o id do serviço a ser excluído: '))
+        Service.servico_excluir(id)
+
+    @staticmethod
+    def horario_inserir():
+        #id = int(input('Informe o id: '))
+        data = datetime.strptime(input('Informe a data: '), "%H%M, %d/%m/%Y")
+        Service.servico_inserir(data)
+
+    @staticmethod
+    def horario_listar():
+        for obj in Service.servico_listar(): print(obj)
+
+    @staticmethod
+    def horario_atualizar():
+        for obj in Service.servico_listar(): print(obj)
+        id = int(input('Informe o id do serviço a ser atualizado: '))
+        data = datetime.strptime(input('Informe a data: '), "%H%M, %d/%m/%Y")
+        Service.servico_atualizar(id, data)
+
+    @staticmethod
+    def horario_excluir():
         for obj in Service.servico_listar(): print(obj)
         id = int(input('Informe o id do serviço a ser excluído: '))
         Service.servico_excluir(id)
