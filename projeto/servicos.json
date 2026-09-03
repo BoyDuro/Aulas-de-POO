@@ -3,5 +3,10 @@
     "id": 1,
     "descricao": "Esse servi\u00e7o \u00e9 mto bom",
     "valor": 10.0
+  },
+  {
+    "id": 2,
+    "descricao": "Trabalhos",
+    "valor": 100.0
   }
 ]

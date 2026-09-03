@@ -43,8 +43,11 @@ class Service:
         ServicoDAO().excluir(id)
 
     @staticmethod
-    def horario_inserir(data):
+    def horario_inserir(data, confirmado, id_cliente, id_servico):
         obj = Horario(0, data)
+        obj.set_confirmado(confirmado)
+        obj.set_id_cliente(id_cliente)
+        obj.set_id_servico(id_servico)
         HorarioDAO().inserir(obj)
     @staticmethod
     def horario_listar():
@@ -53,8 +56,10 @@ class Service:
     def horario_listar_id(id):
         return HorarioDAO().listar_id(id)
     @staticmethod
-    def horario_atualizar(id, data):
+    def horario_atualizar(id, data, confirmado, id_cliente, id_servico):
         obj = Horario(id, data)
+        obj.set_id_cliente(id_cliente)
+        obj.set_id_servico(id_servico)
         HorarioDAO().atualizar(obj)
     @staticmethod
     def horario_excluir(id):
