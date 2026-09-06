@@ -8,7 +8,7 @@ class Horario:
         self.set_id_servico(0)
 
     def __str__(self):
-        return f'{self.__id}–{self.__data.strftime('%d/%m/%Y %H:%M')}-{self.__confirmado}'
+        return f'{self.__id}–{self.__data.strftime("%d/%m/%Y %H:%M")}-{self.__confirmado}'
 
     def get_id(self): return self.__id
     def get_data(self): return self.__data

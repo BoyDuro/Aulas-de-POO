@@ -20,8 +20,8 @@ class ManterHorarioUI:
         else:
             dic = []
             for obj in horarios:
-                Cliente = Service.cliente_listar_id(obj.get_id_cliente())
-                Servico = Service.servico_listar_id(obj.get_id_servico())
+                cliente = Service.cliente_listar_id(obj.get_id_cliente())
+                servico = Service.servico_listar_id(obj.get_id_servico())
                 if cliente != None: cliente = cliente.get_nome()
                 if servico != None: servico = servico.get_descricao()
                 dic.append({'id': obj.get_id(), 'data': obj.get_data(), 'confirmado': obj.get_confirmado(), 'cliente': cliente, 'serviço': servico})
@@ -38,10 +38,10 @@ class ManterHorarioUI:
         if st.button('Inserir'):
             id_cliente = None
             id_servico = None
-        if cliente != None: id_cliente = cliente.get_id()
-        if servico != None: id_servico = servico.get_id()
-        Service.horario_inserir(datetime.strptime(data, '%d/%m/%Y %H:%M'), confirmado, id_cliente, id_servico)
-        st.success('Horário inserido com sucesso')
+            if cliente != None: id_cliente = cliente.get_id()
+            if servico != None: id_servico = servico.get_id()
+            Service.horario_inserir(datetime.strptime(data, '%d/%m/%Y %H:%M'), confirmado, id_cliente, id_servico)
+            st.success('Horário inserido com sucesso')
 
     def atualizar():
         horarios = Service.horario_listar()
