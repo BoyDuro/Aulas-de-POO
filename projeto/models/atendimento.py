@@ -46,4 +46,6 @@ class Atendimento:
     
     @staticmethod
     def from_json(dic):
-        return Atendimento(dic['id'], dic['data'], dic['queixa'], dic['historico'], dic['avaliacao'], dic['prescricao'], dic['id_horario'])
+        atendimento = Atendimento(dic['id'], dic['data'], dic['queixa'], dic['historico'], dic['avaliacao'], dic['prescricao'])
+        atendimento.set_id_horario(dic['id_horario'])
+        return atendimento

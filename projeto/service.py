@@ -65,11 +65,12 @@ class Service:
         ProfissionalDAO().excluir(id)
 
     @staticmethod
-    def horario_inserir(data, confirmado, id_cliente, id_servico):
+    def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
         obj = Horario(0, data)
         obj.set_confirmado(confirmado)
         obj.set_id_cliente(id_cliente)
         obj.set_id_servico(id_servico)
+        obj.set_id_profissional(id_profissional)
         HorarioDAO().inserir(obj)
     @staticmethod
     def horario_listar():
