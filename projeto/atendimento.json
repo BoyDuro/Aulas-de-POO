@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "data": "09/09/2026 00:51",
+    "queixa": "Doen\u00e7a",
+    "historico": "Teve mtas doen\u00e7as",
+    "avaliacao": "Ele t\u00e1 doente",
+    "prescricao": "Tem q tomar rem\u00e9dio",
+    "id_horario": 1
+  },
+  {
+    "id": 2,
+    "data": "09/09/2026 00:53",
+    "queixa": "Ele t\u00e1 dodoi",
+    "historico": "sempre foi doentinho",
+    "avaliacao": "acho q precisa melhorar",
+    "prescricao": "ser\u00e1 q passo rem\u00e9dio",
+    "id_horario": 2
+  },
+  {
+    "id": 3,
+    "data": "09/09/2026 10:30",
+    "queixa": "Gripe",
+    "historico": "teve mta gripe",
+    "avaliacao": "acho q \u00e9 gripe",
+    "prescricao": "paracetamol",
+    "id_horario": 2
+  }
+]

@@ -23,12 +23,12 @@ class ManterAtendimentoUI:
                 horario = Service.horario_listar_id(obj.get_id_horario())
                 if horario != None: horario = horario.get_data()
                 dic.append({'id': obj.get_id(), 'data': obj.get_data(), 'queixa': obj.get_queixa_principal(), 'historico': obj.get_historico_saude(), 'avaliacao': obj.get_avaliacao(), 'prescricao': obj.get_prescricao(), 'horario': horario})
-                df = pd.DataFrame(dic)
-                st.dataframe(df)
+            df = pd.DataFrame(dic)
+            st.dataframe(df)
 
     def inserir():
         horarios = Service.horario_listar()
-        data = st.text_input('Informe a data e horário do atendimento', datetime.now().strftime('%d/%m/%Y %H:%M'))
+        data = st.text_input('Informe a data e horário do atendimento')
         queixa = st.text_input('Informe a queixa principal')
         historico = st.text_input('Informe o histórico de saúde')
         avaliacao = st.text_input('Informe a avaliação')
@@ -39,6 +39,8 @@ class ManterAtendimentoUI:
             if horario != None: id_horario = horario.get_id()
             Service.atendimento_inserir(datetime.strptime(data, '%d/%m/%Y %H:%M'), queixa, historico, avaliacao, prescricao, id_horario)
             st.success('Atendimento inserido com sucesso')
+            time.sleep(2)
+            st.rerun()
 
     def atualizar():
         atendimentos = Service.atendimento_listar()

@@ -27,8 +27,8 @@ class ManterHorarioUI:
                 if servico != None: servico = servico.get_descricao()
                 if profissional != None: profissional = profissional.get_nome()
                 dic.append({'id': obj.get_id(), 'data': obj.get_data(), 'confirmado': obj.get_confirmado(), 'cliente': cliente, 'serviço': servico, 'profissional': profissional})
-                df = pd.DataFrame(dic)
-                st.dataframe(df)
+            df = pd.DataFrame(dic)
+            st.dataframe(df)
 
     def inserir():
         clientes = Service.cliente_listar()
@@ -48,6 +48,8 @@ class ManterHorarioUI:
             if profissional != None: id_profissional = profissional.get_id()
             Service.horario_inserir(datetime.strptime(data, '%d/%m/%Y %H:%M'), confirmado, id_cliente, id_servico, id_profissional)
             st.success('Horário inserido com sucesso')
+            time.sleep(2)
+            st.rerun()
 
     def atualizar():
         horarios = Service.horario_listar()
