@@ -22,7 +22,7 @@ class ManterAtendimentoUI:
             for obj in atendimentos:
                 horario = Service.horario_listar_id(obj.get_id_horario())
                 if horario != None: horario = horario.get_data()
-                dic.append({'id': obj.get_id(), 'data': obj.get_data(), 'queixa': obj.get_queixa_principal(), 'historico': obj.get_historico_saude(), 'avaliacao': obj.get_avalicao(), 'prescricao': obj.get_prescricao(), 'horario': horario})
+                dic.append({'id': obj.get_id(), 'data': obj.get_data(), 'queixa': obj.get_queixa_principal(), 'historico': obj.get_historico_saude(), 'avaliacao': obj.get_avaliacao(), 'prescricao': obj.get_prescricao(), 'horario': horario})
                 df = pd.DataFrame(dic)
                 st.dataframe(df)
 
@@ -37,7 +37,7 @@ class ManterAtendimentoUI:
         if st.button('Inserir'):
             id_horario = None
             if horario != None: id_horario = horario.get_id()
-            Service.horario_inserir(datetime.strptime(data, '%d/%m/%Y %H:%M'), queixa, historico, avaliacao, prescricao, id_horario)
+            Service.atendimento_inserir(datetime.strptime(data, '%d/%m/%Y %H:%M'), queixa, historico, avaliacao, prescricao, id_horario)
             st.success('Atendimento inserido com sucesso')
 
     def atualizar():
@@ -56,7 +56,7 @@ class ManterAtendimentoUI:
             if st.button('Atualizar'):
                 id_horario = None
                 if horario != None: id_horario = horario.get_id()
-                Service.horario_atualizar(op.get_id(), datetime.strptime(data, '%d/%m/%Y %H:%M'), queixa, historico, avaliacao, prescricao, id_horario)
+                Service.atendimento_atualizar(op.get_id(), datetime.strptime(data, '%d/%m/%Y %H:%M'), queixa, historico, avaliacao, prescricao, id_horario)
                 st.success('Atendimento atualizado com sucesso')
 
     def excluir():
@@ -65,7 +65,7 @@ class ManterAtendimentoUI:
         else:
             op = st.selectbox('Exclusão de Horários', atendimentos)
             if st.button('Excluir'):
-                Service.horario_excluir(op.get_id())
+                Service.atendimento_excluir(op.get_id())
                 st.success('Atendimento excluído com sucesso')
                 time.sleep(2)
                 st.rerun()

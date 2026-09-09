@@ -28,7 +28,7 @@ class ManterProfissionalUI:
         email = st.text_input('Informe o e-mail')
         especialidade = st.text_input('Informe a especialidade')
         if st.button('Inserir'):
-            Service.cliente_inserir(nome, email, especialidade)
+            Service.profissional_inserir(nome, email, especialidade)
             st.success('Profissional inserido com sucesso')
             time.sleep(2)
             st.rerun()
@@ -44,7 +44,7 @@ class ManterProfissionalUI:
             especialidade = st.text_input('Nova especialidade', op.get_especialidade())
             if st.button('Atualizar'):
                 id = op.get_id()
-                Service.cliente_atualizar(id, nome, email, especialidade)
+                Service.profissional_atualizar(id, nome, email, especialidade)
                 st.success('Profissional atualizado com sucesso')
     def excluir():
         profissionais = Service.profissional_listar()
@@ -54,5 +54,5 @@ class ManterProfissionalUI:
             op = st.selectbox('Exclusão de Profissionais', profissionais)
             if st.button('Excluir'):
                 id = op.get_id()
-                Service.cliente_excluir(id)
+                Service.profissional_excluir(id)
                 st.success('Profissional excluído com sucesso')
