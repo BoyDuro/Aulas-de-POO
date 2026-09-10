@@ -17,18 +17,24 @@ class ManterClienteUI:
         if len(clientes) == 0:
             st.write('Nenhum cliente cadastrado')
         else:
-            list_dic = []
+            dic = []
             for obj in clientes:
-                list_dic.append(obj.to_json())
-            df = pd.DataFrame(list_dic)
+                convenio = Service.convenio_listar_id(obj.get_id_convenio())
+                if convenio != None: convenio = convenio.get_nome()
+                dic.append({'id': obj.get_id(), 'nome': obj.get_nome(), 'email': obj.get_email(), 'fone': obj.get_fone(), 'id_convenio': convenio})
+            df = pd.DataFrame(dic)
             st.dataframe(df)
 
     def inserir():
+        convenios = Service.convenio_listar()
         nome = st.text_input('Informe o nome')
         email = st.text_input('Informe o e-mail')
         fone = st.text_input('Informe o fone')
+        convenio = st.selectbox('informe o convenio', convenios, index=None)
         if st.button('Inserir'):
-            Service.cliente_inserir(nome, email, fone)
+            id_convenio = None
+            if convenio != None: id_convenio = convenio.get_id()
+            Service.cliente_inserir(nome, email, fone, id_convenio)
             st.success('Cliente inserido com sucesso')
             time.sleep(2)
             st.rerun()
@@ -38,13 +44,17 @@ class ManterClienteUI:
         if len(clientes) == 0:
             st.write('Nenhum cliente cadastrado')
         else:
+            convenios = Service.convenio_listar()
             op = st.selectbox('Atualização de Clientes', clientes)
             nome = st.text_input('Novo nome', op.get_nome())
             email = st.text_input('Novo e-mail', op.get_email())
             fone = st.text_input('Novo fone', op.get_fone())
+            id_convenio = None if op.get_id_convenio() in [0, None] else op.get_id_convenio()
+            convenio = st.selectbox('Informe o novo convenio', convenios, next((i for i, c in enumerate(convenios) if c.get_id() == id_convenio), None))
             if st.button('Atualizar'):
-                id = op.get_id()
-                Service.cliente_atualizar(id, nome, email, fone)
+                id_convenio = None
+                if convenio != None: id_convenio = convenio.get_id()
+                Service.cliente_atualizar(op.get_id(), nome, email, fone, id_convenio)
                 st.success('Cliente atualizado com sucesso')
     def excluir():
         clientes = Service.cliente_listar()
