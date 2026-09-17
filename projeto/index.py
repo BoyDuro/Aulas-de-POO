@@ -6,6 +6,7 @@ from templates.manteratendimentoui import ManterAtendimentoUI
 from templates.abrircontaui import AbrirContaUI
 from templates.loginui import LoginUI
 from templates.perfilclienteui import PerfilClienteUI
+from templates.perfilprofissional import PerfilProfissionalUI
 from service import Service
 import streamlit as st
 
@@ -17,6 +18,9 @@ class IndexUI:
     def menu_cliente():
         op = st.sidebar.selectbox('Menu', ['Meus Dados'])
         if op == 'Meus Dados': PerfilClienteUI.main()
+    def menu_profissional():
+        op = st.sidebar.selectbox('Menu', ['Meus Dados'])
+        if op == 'Meus Dados': PerfilProfissionalUI.main()
     def menu_admin():
         op = st.sidebar.selectbox('Menu', ['Clientes', 'Serviços', 'Horários', 'Profissionais', 'Atendimentos', 'Convenios'])
         if op == 'Clientes':
@@ -39,9 +43,19 @@ class IndexUI:
             IndexUI.menu_visitante()
         else:
             admin = st.session_state['usuario_nome'] == 'admin'
+            clientes = Service.cliente_listar()
+            profissionais = Service.profissional_listar()
+            for obj in clientes:
+                cliente = st.session_state['usuario_nome'] == obj.get_nome()
+                if cliente: break
+            for obj in profissionais:
+                profissional = st.session_state['usuario_nome'] == obj.get_nome()
+                if profissional: break
             st.sidebar.write('Bem-vindo(a), ' + st.session_state['usuario_nome'])
             if admin: IndexUI.menu_admin()
-            else: IndexUI.menu_cliente()
+            elif cliente: IndexUI.menu_cliente()
+            elif profissional: IndexUI.menu_profissional()
+            
             IndexUI.sair_do_sistema()
     def main():
         # verifica a existe o usuário admin

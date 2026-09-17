@@ -59,8 +59,8 @@ class Service:
         ServicoDAO().excluir(id)
 
     @staticmethod
-    def profissional_inserir(nome, email, especialidade):
-        obj = Profissional(0, nome, email, especialidade)
+    def profissional_inserir(nome, email, especialidade, senha):
+        obj = Profissional(0, nome, email, especialidade, senha)
         ProfissionalDAO().inserir(obj)
     @staticmethod
     def profissional_listar():
@@ -69,12 +69,18 @@ class Service:
     def profissional_listar_id(id):
         return ProfissionalDAO().listar_id(id)
     @staticmethod
-    def profissional_atualizar(id, nome, email, especialidade):
-        obj = Profissional(id, nome, email, especialidade)
+    def profissional_atualizar(id, nome, email, especialidade, senha):
+        obj = Profissional(id, nome, email, especialidade, senha)
         ProfissionalDAO().atualizar(obj)
     @staticmethod
     def profissional_excluir(id):
         ProfissionalDAO().excluir(id)
+    @staticmethod
+    def profissional_autenticar(email, senha):
+        for c in Service.profissional_listar():
+            if c.get_email() == email and c.get_senha() == senha:
+                return{'id': c.get_id(), 'nome': c.get_nome()}
+        return None
 
     @staticmethod
     def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
