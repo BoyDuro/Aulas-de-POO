@@ -12,17 +12,19 @@ from templates.abriragendaui import AbrirAgendaUI
 from templates.visualizaragendaui import VisualizarAgendaUI
 from templates.visualizarservicosui import VisualizarServicosUI
 from templates.confirmarservicoui import ConfirmarServicoUI
+from templates.admalterarsenhaui import ADMAlterarSenhaUI
 from service import Service
 import streamlit as st
 
 class IndexUI:
     def menu_admin():
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Serviços", "Cadastro de Horários", "Cadastro de Profissionais", "Cadastro de Atendimentos"])
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Serviços", "Cadastro de Horários", "Cadastro de Profissionais", "Cadastro de Atendimentos", "Alterar senha"])
         if op == "Cadastro de Clientes": ManterClienteUI.main()
         if op == "Cadastro de Serviços": ManterServicoUI.main()
         if op == "Cadastro de Horários": ManterHorarioUI.main()
         if op == "Cadastro de Profissionais": ManterProfissionalUI.main()
         if op == "Cadastro de Atendimentos": ManterAtendimentoUI.main()
+        if op == "Alterar senha": ADMAlterarSenhaUI.main()
     def sidebar():
         if "usuario_id" not in st.session_state:
             IndexUI.menu_visitante()

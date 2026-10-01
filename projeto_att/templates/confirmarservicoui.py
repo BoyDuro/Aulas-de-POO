@@ -19,4 +19,5 @@ class ConfirmarServicoUI:
             if st.button("Confirmar"):
                 Service.horario_atualizar(horario.get_id(), horario.get_data(), True, horario.get_id_cliente(), horario.get_id_servico(), horario.get_id_profissional())
                 st.success("Serviço confirmado")
+                time.sleep(2)
                 st.rerun()
