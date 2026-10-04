@@ -6,11 +6,11 @@ class ConfirmarServicoUI:
     def main():
         st.header("Confirmar Serviço")
         horarios = Service.profissional_visualizar_agenda(st.session_state["usuario_id"])
-        horarios = [
-            h for h in horarios
-            if h.get_id_cliente() != None
-            and h.get_confirmado() == False
-        ]
+        horarios_filtrados = []
+        for h in horarios:
+            if h.get_id_cliente() != None and h.get_confirmado() == False:
+                horarios_filtrados.append(h)
+        horarios = horarios_filtrados
         if len(horarios) == 0: st.write("Nenhuma serviço a confirmar")
         else:
             horario = st.selectbox("Informe o horário", horarios)
