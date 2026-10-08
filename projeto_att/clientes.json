@@ -26,5 +26,12 @@
     "email": "admin",
     "fone": "fone",
     "senha": "0710"
+  },
+  {
+    "id": 5,
+    "nome": "Noivinha",
+    "email": "noiva@email.com",
+    "fone": "9988187504",
+    "senha": "0710"
   }
 ]

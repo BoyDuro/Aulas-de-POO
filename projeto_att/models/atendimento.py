@@ -10,7 +10,7 @@ class Atendimento:
         self.set_prescricao(prescricao)
         self.set_id_horario(0)
         self.set_total(0)
-        self.set_pago(False)
+        self.set_pago(None)
 
     def __str__(self):
         return f"{self.__id} - {self.__data.strftime('%d/%m/%Y %H:%M')} - {self.__queixa_principal}"

@@ -7,10 +7,16 @@ class RegistrarAtendimentoUI:
     def main():
         st.header("Registrar Atendimento")
         horarios = Service.profissional_visualizar_agenda(st.session_state["usuario_id"])
+        atendimentos = Service.atendimento_listar()
         horarios_filtrados = []
         for h in horarios:
             if h.get_confirmado() == True:
-                horarios_filtrados.append(h)
+                usado = False
+                for a in atendimentos:
+                    if a.get_id_horario() == h.get_id():
+                        usado = True
+                if usado == False:
+                    horarios_filtrados.append(h)
         horarios = horarios_filtrados
 
         if len(horarios) == 0:
@@ -23,7 +29,7 @@ class RegistrarAtendimentoUI:
             avaliacao = st.text_input("Informe a avaliação")
             prescricao = st.text_input("Informe a prescrição")
             servicos = Service.servico_listar()
-            servico = st.selectbox("Informe o serviço realizado",servicos)
+            servico = st.selectbox("Informe o serviço realizado", servicos)
             qtd = st.number_input("Quantidade", min_value=1, step=1)
 
             if st.button("Registrar"):
