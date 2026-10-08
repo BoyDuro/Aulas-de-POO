@@ -8,6 +8,8 @@ from models.profissional import Profissional
 from models.profissionaldao import ProfissionalDAO
 from models.atendimento import Atendimento
 from models.atendimentodao import AtendimentoDAO
+from models.atendimentoitens import AtendimentoItens
+from models.atendimentoitensdao import AtendimentoItensDAO
 from datetime import datetime, timedelta
 
 class Service:
@@ -18,8 +20,8 @@ class Service:
     @staticmethod
     def cliente_listar():
         r = ClienteDAO().listar()
-        r.sort(key = lambda obj : obj.get_nome())
-        return ClienteDAO().listar()
+        r.sort(key = lambda obj : obj.get_nome().casefold())
+        return r
     @staticmethod
     def cliente_listar_id(id):
         return ClienteDAO().listar_id(id)
@@ -46,7 +48,7 @@ class Service:
     @staticmethod
     def servico_listar():
         r = ServicoDAO().listar()
-        r.sort(key = lambda obj : obj.get_descricao())
+        r.sort(key = lambda obj : obj.get_descricao().casefold())
         return r
     @staticmethod
     def servico_listar_id(id):
@@ -142,9 +144,11 @@ class Service:
 
 
     @staticmethod
-    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario, total, pago):
         obj = Atendimento(0, data, queixa_principal, historico_saude, avaliacao, prescricao)
         obj.set_id_horario(id_horario)
+        obj.set_total(total)
+        obj.set_pago(pago)
         AtendimentoDAO().inserir(obj)
     @staticmethod
     def atendimento_listar():
@@ -155,13 +159,50 @@ class Service:
     def atendimento_listar_id(id):
         return AtendimentoDAO().listar_id(id)
     @staticmethod
-    def atendimento_atualizar(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+    def atendimento_atualizar(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario, total, pago):
         obj = Atendimento(id, data, queixa_principal, historico_saude, avaliacao, prescricao)
         obj.set_id_horario(id_horario)
+        obj.set_total(total)
+        obj.set_pago(pago)
         AtendimentoDAO().atualizar(obj)
     @staticmethod
     def atendimento_excluir(id):
         AtendimentoDAO().excluir(id)
+
+    @staticmethod
+    def atendimentoitem_inserir(id_atendimento, id_servico, qtd, valor):
+        obj = AtendimentoItens(0, 0, 0, qtd, valor)
+        obj.set_id_atendimento(id_atendimento)
+        obj.set_id_servico(id_servico)
+        AtendimentoItensDAO().inserir(obj)
+
+    @staticmethod
+    def atendimentoitem_listar():
+        return AtendimentoItensDAO().listar()
+
+    @staticmethod
+    def atendimentoitem_listar_id(id):
+        return AtendimentoItensDAO().listar_id(id)
+
+    @staticmethod
+    def atendimentoitem_atualizar(id, id_atendimento, id_servico, qtd, valor):
+        obj = AtendimentoItens(id, 0, 0, qtd, valor)
+        obj.set_id_atendimento(id_atendimento)
+        obj.set_id_servico(id_servico)
+        AtendimentoItensDAO().atualizar(obj)
+
+    @staticmethod
+    def atendimentoitem_excluir(id):
+        AtendimentoItensDAO().excluir(id)
+
+    @staticmethod
+    def atendimentoitem_listar_atendimento(id_atendimento):
+        h = []
+        atendimentos = Service.atendimentoitem_listar()
+        for obj in atendimentos:
+            if obj.get_id_atendimento() == id_atendimento: h.append(obj)
+        h.sort(key = lambda obj : obj.get_data())
+        return h
 
     @staticmethod
     def cliente_criar_admin():
