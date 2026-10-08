@@ -171,7 +171,7 @@ class Service:
 
     @staticmethod
     def atendimentoitem_inserir(id_atendimento, id_servico, qtd, valor):
-        obj = AtendimentoItens(0, 0, 0, qtd, valor)
+        obj = AtendimentoItens(0, qtd, valor)
         obj.set_id_atendimento(id_atendimento)
         obj.set_id_servico(id_servico)
         AtendimentoItensDAO().inserir(obj)
@@ -186,7 +186,7 @@ class Service:
 
     @staticmethod
     def atendimentoitem_atualizar(id, id_atendimento, id_servico, qtd, valor):
-        obj = AtendimentoItens(id, 0, 0, qtd, valor)
+        obj = AtendimentoItens(id, qtd, valor)
         obj.set_id_atendimento(id_atendimento)
         obj.set_id_servico(id_servico)
         AtendimentoItensDAO().atualizar(obj)

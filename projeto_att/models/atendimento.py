@@ -50,3 +50,4 @@ class Atendimento:
         atendimento.set_id_horario(dic["id_horario"])
         atendimento.set_total(dic["total"])
         atendimento.set_pago(dic["pago"])
+        return atendimento

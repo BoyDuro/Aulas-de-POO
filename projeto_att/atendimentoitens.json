@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "id_atendimento": 4,
+    "id_servico": 1,
+    "qtd": 2,
+    "valor": 100.0
+  }
+]

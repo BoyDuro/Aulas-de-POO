@@ -57,7 +57,7 @@ class IndexUI:
         if op == "Abrir Agenda": AbrirAgendaUI.main()
         if op == "Minha Agenda": VisualizarAgendaUI.main()
         if op == "Confirmar Serviço": ConfirmarServicoUI.main()
-        if op == "Registar Atendimento": RegistrarAtendimentoUI.main()
+        if op == "Registrar Atendimento": RegistrarAtendimentoUI.main()
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
             del st.session_state["usuario_id"]
