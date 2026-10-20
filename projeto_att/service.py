@@ -205,6 +205,18 @@ class Service:
         return h
 
     @staticmethod
+    def total_atendimentos():
+        r = ProfissionalDAO().listar()
+        r.sort(key = lambda obj : obj.get_nome().casefold())
+        dic = {}
+        for obj in r:
+            dic[obj.get_id()] = 0
+        horarios = HorarioDAO().listar()
+        for h in horarios:
+            if h.get_confirmado(): dic[h.get_id_profissional()] = dic[h.get_id_profissional()] + 1
+        return dic
+
+    @staticmethod
     def cliente_criar_admin():
         for c in Service.cliente_listar():
             if c.get_email() == "admin": return
