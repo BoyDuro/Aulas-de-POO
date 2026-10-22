@@ -217,6 +217,24 @@ class Service:
         return dic
 
     @staticmethod
+    def horarios_confirmados():
+        h = []
+        horarios = Service.horario_listar()
+        for obj in horarios:
+            if obj.get_confirmado() and obj.get_data().day == datetime.now().day: h.append(obj)
+        h.sort(key = lambda obj : obj.get_data())
+        return h
+    
+    @staticmethod
+    def admin_visualizar_agenda(id_profissional):
+        h = []
+        horarios = Service.horario_listar()
+        for obj in horarios:
+            if obj.get_id_profissional() == id_profissional: h.append(obj)
+        h.sort(key = lambda obj : obj.get_data())
+        return h
+
+    @staticmethod
     def cliente_criar_admin():
         for c in Service.cliente_listar():
             if c.get_email() == "admin": return
