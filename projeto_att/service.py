@@ -205,7 +205,7 @@ class Service:
         return h
 
     @staticmethod
-    def total_atendimentos():
+    def total_atendimentos(dt_incial, dt_final):
         r = ProfissionalDAO().listar()
         r.sort(key = lambda obj : obj.get_nome().casefold())
         dic = {}
@@ -213,7 +213,7 @@ class Service:
             dic[obj.get_id()] = 0
         horarios = HorarioDAO().listar()
         for h in horarios:
-            if h.get_confirmado(): dic[h.get_id_profissional()] = dic[h.get_id_profissional()] + 1
+            if h.get_confirmado() and dt_incial <= h.get_data().date() <= dt_final: dic[h.get_id_profissional()] = dic[h.get_id_profissional()] + 1
         return dic
 
     @staticmethod
