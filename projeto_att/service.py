@@ -68,6 +68,9 @@ class Service:
     
     @staticmethod
     def servico_inserir(descricao, valor):
+        for obj in Service.servico_listar():
+            if obj.get_descricao() == descricao:
+                raise ValueError('Serviço já cadastrado')
         obj = Servico(0, descricao, valor)
         ServicoDAO().inserir(obj)
     @staticmethod
@@ -80,10 +83,16 @@ class Service:
         return ServicoDAO().listar_id(id)
     @staticmethod
     def servico_atualizar(id, descricao, valor):
+        for obj in Service.servico_listar():
+            if obj.get_id() != id and obj.get_descricao() == descricao:
+                raise ValueError('Descrição já cadastrada em outro serviço')
         obj = Servico(id, descricao, valor)
         ServicoDAO().atualizar(obj)
     @staticmethod
     def servico_excluir(id):
+        for obj in Service.horario_listar():
+            if obj.get_id_servico() == id:
+                raise ValueError('Serviço já agendado: não é possível excluir')
         ServicoDAO().excluir(id)
 
     @staticmethod
@@ -124,8 +133,10 @@ class Service:
     def horario_excluir(id):
         horarios = Service.horario_listar()
         for h in horarios:
-            if h.get_id_cliente() != 0:
-                raise ValueError('Não pode excluir um horário já agendado por um cliente')
+            if h.get_id() == id:
+                cliente = Service.cliente_listar_id(h.get_id_cliente())
+                if cliente != None:
+                    raise ValueError('Não pode excluir um horário já agendado por um cliente')
         HorarioDAO().excluir(id)
 
     @staticmethod
