@@ -32,14 +32,6 @@
     "id_profissional": 1
   },
   {
-    "id": 1,
-    "data": "03/09/2026 17:21",
-    "confirmado": true,
-    "id_cliente": 1,
-    "id_servico": 1,
-    "id_profissional": 3
-  },
-  {
     "id": 9,
     "data": "30/09/2026 17:53",
     "confirmado": false,
@@ -542,5 +534,13 @@
     "id_cliente": null,
     "id_servico": null,
     "id_profissional": 4
+  },
+  {
+    "id": 1,
+    "data": "09/09/2026 14:44",
+    "confirmado": true,
+    "id_cliente": 1,
+    "id_servico": 1,
+    "id_profissional": 3
   }
 ]
