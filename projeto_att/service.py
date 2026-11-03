@@ -15,8 +15,6 @@ from datetime import datetime, timedelta
 class Service:
     @staticmethod
     def cliente_inserir(nome, email, fone, senha):
-        if email == 'admin':
-            raise ValueError('Email não deve ser admin')
         profissionais = Service.profissional_listar()
         clientes = Service.cliente_listar()
         for p in profissionais:
@@ -37,15 +35,13 @@ class Service:
         return ClienteDAO().listar_id(id)
     @staticmethod
     def cliente_atualizar(id, nome, email, fone, senha):
-        if email == 'admin':
-            raise ValueError('Email não deve ser admin')
         profissionais = Service.profissional_listar()
         clientes = Service.cliente_listar()
         for p in profissionais:
             if email == p.get_email():
                 raise ValueError('Email não deve ser igual')
         for c in clientes:
-            if email == c.get_email():
+            if id != c.get_id() and email == c.get_email():
                 raise ValueError('Email não deve ser igual')
         obj = Cliente(id, nome, email, fone, senha)
         ClienteDAO().atualizar(obj)
@@ -165,8 +161,6 @@ class Service:
 
     @staticmethod
     def profissional_inserir(nome, email, especialidade, senha):
-        if email == 'admin':
-            raise ValueError('Email não deve ser admin')
         profissionais = Service.profissional_listar()
         clientes = Service.cliente_listar()
         for p in profissionais:
@@ -187,12 +181,10 @@ class Service:
         return ProfissionalDAO().listar_id(id)
     @staticmethod
     def profissional_atualizar(id, nome, email, especialidade, senha):
-        if email == 'admin':
-            raise ValueError('Email não deve ser admin')
         profissionais = Service.profissional_listar()
         clientes = Service.cliente_listar()
         for p in profissionais:
-            if email == p.get_email():
+            if id != p.get_id() and email == p.get_email():
                 raise ValueError('Email não deve ser igual')
         for c in clientes:
             if email == c.get_email():
