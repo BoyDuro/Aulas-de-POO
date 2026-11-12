@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class dao(ABC):
+class DAO(ABC):
     def __init__(self, arquivo):
         self._arquivo = arquivo
         self._objetos = []
@@ -36,8 +36,10 @@ class dao(ABC):
             self._objetos.remove(aux)
             self._salvar()
 
+    @abstractmethod
     def _abrir(self):  
         pass
 
+    @abstractmethod
     def _salvar(self):    
         pass
