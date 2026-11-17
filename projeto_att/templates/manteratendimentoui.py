@@ -58,7 +58,7 @@ class ManterAtendimentoUI:
             if st.button("Atualizar"):
                 Service.atendimento_atualizar(op.get_id(), datetime.strptime(data, "%d/%m/%Y %H:%M"),\
                                              queixa_principal, historico_saude, avaliacao, prescricao,\
-                                             horario.get_id())
+                                             horario.get_id(), op.get_total(), op.get_pago())
                 st.success("Atendimento atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()

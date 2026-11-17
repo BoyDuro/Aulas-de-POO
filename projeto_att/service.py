@@ -1,13 +1,13 @@
 from models.cliente import Cliente         # entidade
 from dao_sql.clientedao import ClienteDAO   # persistência
 from models.servico import Servico
-from dao_json.servicodao import ServicoDAO
+from dao_sql.servicodao import ServicoDAO
 from models.horario import Horario
-from dao_json.horariodao import HorarioDAO
+from dao_sql.horariodao import HorarioDAO
 from models.profissional import Profissional
-from dao_json.profissionaldao import ProfissionalDAO
+from dao_sql.profissionaldao import ProfissionalDAO
 from models.atendimento import Atendimento
-from dao_json.atendimentodao import AtendimentoDAO
+from dao_sql.atendimentodao import AtendimentoDAO
 from models.atendimentoitens import AtendimentoItens
 from dao_json.atendimentoitensdao import AtendimentoItensDAO
 from datetime import datetime, timedelta
@@ -210,7 +210,7 @@ class Service:
 
 
     @staticmethod
-    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario, total, pago):
+    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario, total=0, pago=False):
         obj = Atendimento(0, data, queixa_principal, historico_saude, avaliacao, prescricao)
         obj.set_id_horario(id_horario)
         obj.set_total(total)

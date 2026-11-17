@@ -29,7 +29,6 @@ class Database:
             );
         ''')
 
-        # --------------------- Tabela Profissional ---------------------
         cls.execute('''
             CREATE TABLE IF NOT EXISTS profissional (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
